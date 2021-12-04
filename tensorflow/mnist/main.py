@@ -1,4 +1,4 @@
-from model import simple_model
+from model import simple_model,model_mobilnet
 from tensorflow.keras import losses,metrics, optimizers
 from data_loader import X_train, y_train ,X_test, y_test
 
@@ -6,7 +6,7 @@ from data_loader import X_train, y_train ,X_test, y_test
 # x_test.shape,  y_test.shape : (10000, 28, 28) (10000,)
 
 
-model = simple_model(10)
+model = model_mobilnet()
 
 model.compile(
               loss = losses.CategoricalCrossentropy(),
@@ -14,4 +14,4 @@ model.compile(
               optimizer = optimizers.Adam()
               )
 
-model.fit(X_train, y_train, batch_size = 32, epochs = 2)
+model.fit(X_train, y_train, batch_size = 16, epochs = 10, validation_data=(X_test, y_test))
